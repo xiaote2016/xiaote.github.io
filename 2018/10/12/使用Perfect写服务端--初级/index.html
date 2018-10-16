@@ -8,20 +8,20 @@
   <link rel="dns-prefetch" href="http://blog.xtxiete.com">
   <title>使用Perfect写服务端--初级（一） | Xiaote&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="初入程序员行业，请多指教！ 之前一直是在做iOS开发，用的是OC。由于前阵子比较闲，之前又有了解过Swift可以用来写服务端，所以趁机会想进一步实践。 目前我所知的Swift的后端框架主要有Perfect、Vapor、Kitura、Zewo，因为有在其他文章中看到有人测试几个框架性能，综合各方面性能，Perfect是比较优秀的，所以我是选择了Perfect来进行后面的实践。 实践过程1.下载模板P">
+  <meta name="description" content="初入程序员行业，请多指教！ 之前一直是在做iOS开发，用的是OC。由于前阵子比较闲，之前又有了解过Swift可以用来写服务端，所以趁机会想进一步实践。 目前我所知的Swift的后端框架主要有Perfect、Vapor、Kitura、Zewo，因为有在其他文章中看到有人测试几个框架性能，综合各方面性能，Perfect是比较优秀的，所以我是选择了Perfect来进行后面的实践。 Perfect官网 ：">
 <meta name="keywords" content="swift">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用Perfect写服务端--初级（一）">
 <meta property="og:url" content="http://blog.xtxiete.com/2018/10/12/使用Perfect写服务端--初级/index.html">
 <meta property="og:site_name" content="Xiaote&#39;s Blog">
-<meta property="og:description" content="初入程序员行业，请多指教！ 之前一直是在做iOS开发，用的是OC。由于前阵子比较闲，之前又有了解过Swift可以用来写服务端，所以趁机会想进一步实践。 目前我所知的Swift的后端框架主要有Perfect、Vapor、Kitura、Zewo，因为有在其他文章中看到有人测试几个框架性能，综合各方面性能，Perfect是比较优秀的，所以我是选择了Perfect来进行后面的实践。 实践过程1.下载模板P">
+<meta property="og:description" content="初入程序员行业，请多指教！ 之前一直是在做iOS开发，用的是OC。由于前阵子比较闲，之前又有了解过Swift可以用来写服务端，所以趁机会想进一步实践。 目前我所知的Swift的后端框架主要有Perfect、Vapor、Kitura、Zewo，因为有在其他文章中看到有人测试几个框架性能，综合各方面性能，Perfect是比较优秀的，所以我是选择了Perfect来进行后面的实践。 Perfect官网 ：">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://blog.xtxiete.com/assets/contentImg/img_perfect.png">
 <meta property="og:image" content="http://blog.xtxiete.com/assets/contentImg/img_perfect1.png">
-<meta property="og:updated_time" content="2018-10-15T09:19:47.000Z">
+<meta property="og:updated_time" content="2018-10-16T15:02:32.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用Perfect写服务端--初级（一）">
-<meta name="twitter:description" content="初入程序员行业，请多指教！ 之前一直是在做iOS开发，用的是OC。由于前阵子比较闲，之前又有了解过Swift可以用来写服务端，所以趁机会想进一步实践。 目前我所知的Swift的后端框架主要有Perfect、Vapor、Kitura、Zewo，因为有在其他文章中看到有人测试几个框架性能，综合各方面性能，Perfect是比较优秀的，所以我是选择了Perfect来进行后面的实践。 实践过程1.下载模板P">
+<meta name="twitter:description" content="初入程序员行业，请多指教！ 之前一直是在做iOS开发，用的是OC。由于前阵子比较闲，之前又有了解过Swift可以用来写服务端，所以趁机会想进一步实践。 目前我所知的Swift的后端框架主要有Perfect、Vapor、Kitura、Zewo，因为有在其他文章中看到有人测试几个框架性能，综合各方面性能，Perfect是比较优秀的，所以我是选择了Perfect来进行后面的实践。 Perfect官网 ：">
 <meta name="twitter:image" content="http://blog.xtxiete.com/assets/contentImg/img_perfect.png">
   
     <link rel="alternative" href="/atom.xml" title="Xiaote&#39;s Blog" type="application/atom+xml">
@@ -165,10 +165,14 @@
         <p>初入程序员行业，请多指教！</p>
 <p>之前一直是在做iOS开发，用的是OC。由于前阵子比较闲，之前又有了解过Swift可以用来写服务端，所以趁机会想进一步实践。</p>
 <p>目前我所知的Swift的后端框架主要有<br><code>Perfect</code>、<code>Vapor</code>、<code>Kitura</code>、<code>Zewo</code>，因为有在其他文章中看到有人测试几个框架性能，综合各方面性能，Perfect是比较优秀的，所以我是选择了Perfect来进行后面的实践。</p>
-<h2 id="实践过程"><a href="#实践过程" class="headerlink" title="实践过程"></a>实践过程</h2><h4 id="1-下载模板"><a href="#1-下载模板" class="headerlink" title="1.下载模板"></a>1.下载模板</h4><p><a href="https://github.com/PerfectlySoft" target="_blank" rel="noopener">PerfectlySoft</a>中提供了一个例子<a href="https://github.com/PerfectlySoft/PerfectTemplate" target="_blank" rel="noopener">PerfectTemplate</a>，可以使用git克隆到本地</p>
+<p>Perfect官网 ：<a href="https://www.perfect.org/" target="_blank" rel="noopener">Perfect官网</a></p>
+<p>Perfect官方中文文档：<a href="https://www.perfect.org/docs/index_zh_CN.html" target="_blank" rel="noopener">Perfect官方中文文档</a></p>
+<h2 id="实践过程"><a href="#实践过程" class="headerlink" title="实践过程"></a>实践过程</h2><h4 id="实践环境"><a href="#实践环境" class="headerlink" title="实践环境"></a>实践环境</h4><p><code>MacOS 10.13.6</code></p>
+<p><code>Xcode 9</code></p>
+<h4 id="1-下载模板"><a href="#1-下载模板" class="headerlink" title="1.下载模板"></a>1.下载模板</h4><p><a href="https://github.com/PerfectlySoft" target="_blank" rel="noopener">PerfectlySoft</a>中提供了一个例子<a href="https://github.com/PerfectlySoft/PerfectTemplate" target="_blank" rel="noopener">PerfectTemplate</a>，可以使用git克隆到本地</p>
 <pre><code>git clone https://github.com/PerfectlySoft/PerfectTemplate.git
 </code></pre><p>然后可以通过<code>SPM</code>软件包管理器编译。</p>
-<p>PerfectTemplate 文件夹里需要注意的是<code>Package.swift</code>文件,<code>Package.swift</code>是<code>SPM</code>编译项目时需要用到的，里面包含了实际开发时需要用到的依赖，,<code>SPM</code> 会按照<code>Package.swift</code>文件来为我们生成Target。</p>
+<p>PerfectTemplate 文件夹里需要注意的是<code>Package.swift</code>文件,<code>Package.swift</code>是<code>SPM</code>编译项目时需要用到的，里面包含了实际开发时需要用到的依赖，<code>SPM</code> 会按照<code>Package.swift</code>文件来为我们生成Target。</p>
 <h3 id="2-编译"><a href="#2-编译" class="headerlink" title="2.编译"></a>2.编译</h3><p>先 cd 到  PerfectTemplate 文件夹下，然后使用<code>build</code>命令编译</p>
 <pre><code>$ swift build
 </code></pre><p><code>build</code>命令会根据<code>Package.swift</code>文件中的配置下载依赖库，下载的时间可能有点长，等等就好，下载完成后会有一个隐形文件夹<code>.build</code>,里面有包含一些依赖库，和一个debug下的可执行文件。可以直接双击运行可执行文件在本地启动一个服务，也可以通过执行形成的命令启动</p>
