@@ -38,7 +38,7 @@
 <meta property="og:image" content="http://blog.xtxiete.com/assets/contentImg/img_perfect_mid_14.png">
 <meta property="og:image" content="http://blog.xtxiete.com/assets/contentImg/img_perfect_mid_15.png">
 <meta property="og:image" content="http://blog.xtxiete.com/assets/contentImg/img_perfect_mid_16.png">
-<meta property="og:updated_time" content="2018-10-16T15:07:14.000Z">
+<meta property="og:updated_time" content="2018-10-16T15:23:42.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用Perfect写服务端--初级（二）">
 <meta name="twitter:description" content="在上一篇博客使用Perfect写服务端–初级（一）中已经示范了在本地启动一个服务的过程，这一篇博客将展示具体的一些基本开发，写接口、连接数据库、数据库增删查改等。 启动HTTP服务我们之前已经克隆了官方的例子，并且已经编译好生成了Xcode可以直接打开的工程文件，现在打开工程，在PerfectTemplate目录下新建一个swift文件，取名为MyServer  导入需要用到的库 import P">
@@ -193,6 +193,7 @@ import PerfectHTTPServer
 <pre><code>$ swift build
 $ swift package generate-xcodeproj
 </code></pre><p>重新编译。</p>
+<a id="more"></a>
 <p>具体代码：</p>
 <pre><code>open class MyServer{
 
