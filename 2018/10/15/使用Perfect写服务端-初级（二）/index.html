@@ -9,7 +9,7 @@
   <title>使用Perfect写服务端--初级（二） | Xiaote&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="在上一篇博客使用Perfect写服务端–初级（一）中已经示范了在本地启动一个服务的过程，这一篇博客将展示具体的一些基本开发，写接口、连接数据库、数据库增删查改等。 启动HTTP服务我们之前已经克隆了官方的例子，并且已经编译好生成了Xcode可以直接打开的工程文件，现在打开工程，在PerfectTemplate目录下新建一个swift文件，取名为MyServer  导入需要用到的库 import P">
-<meta name="keywords" content="swift">
+<meta name="keywords" content="swift,HTTP服务">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用Perfect写服务端--初级（二）">
 <meta property="og:url" content="http://blog.xtxiete.com/2018/10/15/使用Perfect写服务端-初级（二）/index.html">
@@ -38,7 +38,7 @@
 <meta property="og:image" content="http://blog.xtxiete.com/assets/contentImg/img_perfect_mid_14.png">
 <meta property="og:image" content="http://blog.xtxiete.com/assets/contentImg/img_perfect_mid_15.png">
 <meta property="og:image" content="http://blog.xtxiete.com/assets/contentImg/img_perfect_mid_16.png">
-<meta property="og:updated_time" content="2018-10-16T15:23:42.000Z">
+<meta property="og:updated_time" content="2018-10-23T08:39:07.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用Perfect写服务端--初级（二）">
 <meta name="twitter:description" content="在上一篇博客使用Perfect写服务端–初级（一）中已经示范了在本地启动一个服务的过程，这一篇博客将展示具体的一些基本开发，写接口、连接数据库、数据库增删查改等。 启动HTTP服务我们之前已经克隆了官方的例子，并且已经编译好生成了Xcode可以直接打开的工程文件，现在打开工程，在PerfectTemplate目录下新建一个swift文件，取名为MyServer  导入需要用到的库 import P">
@@ -572,6 +572,10 @@ open class DataBaseManager {
         		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">swift</a>
         		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">HTTP服务</a>
+        		</li>
       		
 		</ul>
 	</div>
@@ -640,6 +644,15 @@ open class DataBaseManager {
 
   
 <nav id="article-nav">
+  
+    <a href="/2018/10/23/URL is recognized in the string/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          字符串中识别URL
+        
+      </div>
+    </a>
   
   
     <a href="/2018/10/12/使用Perfect写服务端--初级/" id="article-nav-older" class="article-nav-link-wrap">
@@ -765,7 +778,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">iOS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Objective-C</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">swift</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">HTTP服务</a>
               </li>
             
             <div class="clearfix"></div>
