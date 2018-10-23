@@ -18,7 +18,7 @@
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://blog.xtxiete.com/assets/contentImg/regularEffect.png">
 <meta property="og:image" content="http://blog.xtxiete.com/assets/contentImg/regularApiEffect.png">
-<meta property="og:updated_time" content="2018-10-23T11:34:42.000Z">
+<meta property="og:updated_time" content="2018-10-23T11:41:50.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="字符串中识别URL">
 <meta name="twitter:description" content="之前一个做Java后端的朋友问了我这个问题：“你们iOS中一段文字中怎么识别中间有没有URL”，我第一反应就是使用正则表达式，然后自己捣鼓了下就有了下面的结果。 由于自己对正则表达式不是特别懂，于是在谷歌上直接搜索到了一段，经过测试稍微修改下： ((http[s]{0,1}|ftp)://[a-zA-Z0-9\\.\\-]+\\.([a-zA-Z]{2,7})(:\\d+)?(/[a-zA-Z0-">
@@ -177,7 +177,8 @@ var _hmt = _hmt || [];
 <pre><code>((http[s]{0,1}|ftp)://[a-zA-Z0-9\\.\\-]+\\.([a-zA-Z]{2,7})(:\\d+)?(/[a-zA-Z0-9\\.\\-~!@#$%^&amp;*+?:_/=&lt;&gt;]*)?)|(www.[a-zA-Z0-9\\.\\-]+\\.([a-zA-Z]{2,7})(:\\d+)?(/[a-zA-Z0-9\\.\\-~!@#$%^&amp;*+?:_/=&lt;&gt;]*)?)
 </code></pre><p>然后使用<code>NSRegularExpression</code>来做正则校验</p>
 <pre><code>NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:regulaStr    options:NSRegularExpressionCaseInsensitive  error:&amp;error];
-</code></pre><p>其中<code>options:(NSRegularExpressionOptions)</code>参数对应的枚举值的翻译是：</p>
+</code></pre><a id="more"></a>
+<p>其中<code>options:(NSRegularExpressionOptions)</code>参数对应的枚举值的翻译是：</p>
 <pre><code>NSRegularExpressionCaseInsensitive // 不区分字母大小写匹配
 NSRegularExpressionAllowCommentsAndWhitespace // 忽略正则表达式中的空格和#号后面的注释。 表达式 a b#c 会匹配到 ab
 NSRegularExpressionIgnoreMetacharacters //将整个正则表达式视为字符串处理
