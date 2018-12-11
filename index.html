@@ -150,6 +150,94 @@ var _hmt = _hmt || [];
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-KVOMutableArray的分析和理解" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/12/11/KVOMutableArray的分析和理解/">KVOMutableArray的分析和理解</a>
+    </h1>
+  
+
+        
+        <a href="/2018/12/11/KVOMutableArray的分析和理解/" class="archive-article-date">
+  	<time datetime="2018-12-11T03:50:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>项目中经常会需要监听一个可变数组里的内容的变化，一般监听用到的方式就是<code>KVO</code>，但我们知道<code>KVO</code>监听的是对象的地址的改变，而可变数组里的内容的改变是不会直接导致数组对象地址的改变的。</p>
+<p>对于上述情况，一般的做法还是通过<code>KVO</code>，只是操作数组的时候是通过<code>mutableArrayValueForKey:</code>的方式取得可变数组，然后进行一些改变内容的操作</p>
+<pre><code>[[self.arrayTest mutableArrayValueForKey:@&quot;arrar&quot;] addObject:@&quot;111&quot;];
+</code></pre><p>但是通过这种方式为什么就能使<code>KVO</code>监听到可变数组的内容的改变呢？<br>这就得先知道<code>KVO</code>的原理了，而关于<code>KVO</code>原理的文章还是有很多，这里我只做简单描述。</p>
+<p><code>KVO</code>的原理是在程序运行的时候动态的给被监听属性所在的类创建了一个子类，实例化对象的isa指针指向这个子类，然后这个子类会重写父类的方法，在重写被监听属性的<code>set</code>方法的时候会调用一个C语言函数，这个函数里会在给属性赋值前后分别调用下面两个方法</p>
+<pre><code>willChangeValueForKey:
+didChangeValueForKey:
+</code></pre><p>调用<code>didChangeValueForKey:</code>方法后就会通知监听者监听的属性值已经改变。我们修改属性的值实际上是调用了<code>KVO</code>动态创建的子类里的属性<code>set</code>方法。<br><a href="http://www.cocoachina.com/ios/20180726/24319.html" target="_blank" rel="noopener">详细参考链接</a></p>
+<p>所以从这里可以看出<code>KVO</code>监听属性的改变可以通过调用属性的<code>set</code>方法触发<code>KVO</code>通知。</p>
+        
+          <a class="article-more-a" href="/2018/12/11/KVOMutableArray的分析和理解/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">iOS</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Objective-C</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/12/11/KVOMutableArray的分析和理解/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-AppStoreAuditProblem" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
