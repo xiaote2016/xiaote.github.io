@@ -150,6 +150,212 @@ var _hmt = _hmt || [];
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-AppStoreAuditProblem" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/12/11/AppStoreAuditProblem/">提交审核反馈的问题（持续更新）</a>
+    </h1>
+  
+
+        
+        <a href="/2018/12/11/AppStoreAuditProblem/" class="archive-article-date">
+  	<time datetime="2018-12-11T02:50:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="1-Guideline-2-3-3-Performance-Accurate-Metadata"><a href="#1-Guideline-2-3-3-Performance-Accurate-Metadata" class="headerlink" title="1.Guideline 2.3.3 - Performance - Accurate Metadata"></a>1.Guideline 2.3.3 - Performance - Accurate Metadata</h3><pre><code>We noticed that your screenshots do not sufficiently reflect your app in use.
+
+Specifically, your screenshots do not display the app in the correct device frame.
+
+Next Steps
+
+To resolve this issue, please revise your screenshots to ensure that they accurately reflect the app in use on the supported devices. For iPhone, you need a set of 5.5-inch display screenshots and for iPad, you need a set for 12.9-inch display. This set will be scaled appropriately down to other device sizes when viewed on the App Store in each territory.
+
+Note that 6.5-inch display assets for iPhone XS Max are optional, and can scale down to iPhone XR, iPhone XS, and iPhone X. Screenshots that include features like rounded corners or sensor housing should only be used for the 6.5-inch or 5.8-inch display.
+
+Resources
+
+For resources on creating great screenshots for the App Store, you may want to review the App Store Product Page information available on the Apple developer portal.
+
+Please ensure you have made any screenshot modifications using Media Manager. You should confirm your app looks and behaves identically in all languages and on all supported devices. Learn more about uploading app previews and screenshots in App Store Connect Help.
+
+Please see attached screenshots for details.
+
+Since your App Store Connect status is Metadata Rejected, we do NOT require a new binary. To revise the metadata, visit App Store Connect to select your app and revise the desired metadata values. Once you’ve completed all changes, reply to this message in Resolution Center and we will continue the review.
+</code></pre><p>原因是我上传应用截图的时候勾选了可选的6.5英寸显示屏，但是上传的图片中包含了手机的边框，但是这个手机的边框不是按照iPhone X等手机的边框设置的，所以苹果认为不能正确反映在iPhone X上展示的一个真实效果，因为X系列都有刘海等。</p>
+<p>解决办法（两个）：1.增加一套设计图，根据iPhone X的外形设计；<br>                  2.不勾选可选的6.5英寸显示屏，这样就不要上传对应的截图了</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">iOS</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/12/11/AppStoreAuditProblem/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Summary of minor problems in the project" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/12/03/Summary of minor problems in the project/">项目小问题总结（持续更新）</a>
+    </h1>
+  
+
+        
+        <a href="/2018/12/03/Summary of minor problems in the project/" class="archive-article-date">
+  	<time datetime="2018-12-03T02:40:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-03</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="1-判断电话是否拨出"><a href="#1-判断电话是否拨出" class="headerlink" title="1.判断电话是否拨出"></a>1.判断电话是否拨出</h3><p>项目中有时候需要统计某个电话是否真的拨打出去，可以用下面的方法：</p>
+<p>iOS 10（包括10）之前：<br>    在需要用到的地方导入</p>
+<pre><code>#import &lt;CoreTelephony/CTCallCenter.h&gt;
+
+#import &lt;CoreTelephony/CTCall.h&gt;
+</code></pre><p>创建一个属性</p>
+<pre><code>@property (nonatomic, strong) CTCallCenter *callCenter;
+</code></pre><p>赋值：</p>
+<pre><code>self.callCenter = [[CTCallCenter alloc] init];
+self.callCenter.callEventHandler = ^(CTCall* call) {
+    if ([call.callState isEqualToString:CTCallStateDisconnected])
+    {
+        NSLog(@&quot;挂断了电话&quot;);
+    }
+    else if ([call.callState isEqualToString:CTCallStateConnected])
+    {
+        NSLog(@&quot;电话通了&quot;);
+    }
+    else if([call.callState isEqualToString:CTCallStateIncoming])
+    {
+        NSLog(@&quot;来电话了&quot;);
+
+    }
+    else if ([call.callState isEqualToString:CTCallStateDialing])
+    {
+        NSLog(@&quot;正在播出电话&quot;);
+    }
+    else
+    {
+        NSLog(@&quot;什么也没有&quot;);
+    }
+};
+</code></pre><p>iOS 10之后替换为另外一个：<br>
+        
+          <a class="article-more-a" href="/2018/12/03/Summary of minor problems in the project/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">iOS</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Objective-C</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/12/03/Summary of minor problems in the project/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-URL is recognized in the string" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     

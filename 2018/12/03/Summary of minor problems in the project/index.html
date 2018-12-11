@@ -6,19 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://blog.xtxiete.com">
-  <title>Tag: Objective-C | Xiaote&#39;s Blog</title>
+  <title>项目小问题总结（持续更新） | Xiaote&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="湖南人士，就职于58同城我要车。">
-<meta name="keywords" content="iOS，架子鼓，电子鼓">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Xiaote&#39;s Blog">
-<meta property="og:url" content="http://blog.xtxiete.com/tags/Objective-C/index.html">
+  <meta name="description" content="1.判断电话是否拨出项目中有时候需要统计某个电话是否真的拨打出去，可以用下面的方法： iOS 10（包括10）之前：    在需要用到的地方导入 #import &amp;lt;CoreTelephony/CTCallCenter.h&amp;gt;  #import &amp;lt;CoreTelephony/CTCall.h&amp;gt; 创建一个属性 @property (nonatomic, strong) CTCal">
+<meta name="keywords" content="iOS,Objective-C">
+<meta property="og:type" content="article">
+<meta property="og:title" content="项目小问题总结（持续更新）">
+<meta property="og:url" content="http://blog.xtxiete.com/2018/12/03/Summary of minor problems in the project/index.html">
 <meta property="og:site_name" content="Xiaote&#39;s Blog">
-<meta property="og:description" content="湖南人士，就职于58同城我要车。">
+<meta property="og:description" content="1.判断电话是否拨出项目中有时候需要统计某个电话是否真的拨打出去，可以用下面的方法： iOS 10（包括10）之前：    在需要用到的地方导入 #import &amp;lt;CoreTelephony/CTCallCenter.h&amp;gt;  #import &amp;lt;CoreTelephony/CTCall.h&amp;gt; 创建一个属性 @property (nonatomic, strong) CTCal">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-12-11T02:46:58.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Xiaote&#39;s Blog">
-<meta name="twitter:description" content="湖南人士，就职于58同城我要车。">
+<meta name="twitter:title" content="项目小问题总结（持续更新）">
+<meta name="twitter:description" content="1.判断电话是否拨出项目中有时候需要统计某个电话是否真的拨打出去，可以用下面的方法： iOS 10（包括10）之前：    在需要用到的地方导入 #import &amp;lt;CoreTelephony/CTCallCenter.h&amp;gt;  #import &amp;lt;CoreTelephony/CTCall.h&amp;gt; 创建一个属性 @property (nonatomic, strong) CTCal">
   
     <link rel="alternative" href="/atom.xml" title="Xiaote&#39;s Blog" type="application/atom+xml">
   
@@ -148,36 +149,120 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-Summary of minor problems in the project" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      项目小问题总结（持续更新）
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/12/03/Summary of minor problems in the project/" class="archive-article-date">
+
+        
+        <a href="/2018/12/03/Summary of minor problems in the project/" class="archive-article-date">
   	<time datetime="2018-12-03T02:40:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-03</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/12/03/Summary of minor problems in the project/">项目小问题总结（持续更新）</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="1-判断电话是否拨出"><a href="#1-判断电话是否拨出" class="headerlink" title="1.判断电话是否拨出"></a>1.判断电话是否拨出</h3><p>项目中有时候需要统计某个电话是否真的拨打出去，可以用下面的方法：</p>
+<p>iOS 10（包括10）之前：<br>    在需要用到的地方导入</p>
+<pre><code>#import &lt;CoreTelephony/CTCallCenter.h&gt;
 
-        <div class="article-info info-on-right">
-          
+#import &lt;CoreTelephony/CTCall.h&gt;
+</code></pre><p>创建一个属性</p>
+<pre><code>@property (nonatomic, strong) CTCallCenter *callCenter;
+</code></pre><p>赋值：</p>
+<pre><code>self.callCenter = [[CTCallCenter alloc] init];
+self.callCenter.callEventHandler = ^(CTCall* call) {
+    if ([call.callState isEqualToString:CTCallStateDisconnected])
+    {
+        NSLog(@&quot;挂断了电话&quot;);
+    }
+    else if ([call.callState isEqualToString:CTCallStateConnected])
+    {
+        NSLog(@&quot;电话通了&quot;);
+    }
+    else if([call.callState isEqualToString:CTCallStateIncoming])
+    {
+        NSLog(@&quot;来电话了&quot;);
+
+    }
+    else if ([call.callState isEqualToString:CTCallStateDialing])
+    {
+        NSLog(@&quot;正在播出电话&quot;);
+    }
+    else
+    {
+        NSLog(@&quot;什么也没有&quot;);
+    }
+};
+</code></pre><p>iOS 10之后替换为另外一个：<br><a id="more"></a><br>导入</p>
+<pre><code>#import &lt;CallKit/CallKit.h&gt;
+</code></pre><p>创建属性：</p>
+<pre><code>@property (nonatomic, strong) CXCallController *call;
+</code></pre><p>赋值：</p>
+<pre><code>self.call = [[CXCallController alloc] init];
+//设置代理
+[self.call.callObserver setDelegate:self queue:nil];
+
+
+- (void)callObserver:(CXCallObserver *)callObserver callChanged:(CXCall *)call{
+    // 注意拨出和结束 outgoing 都是true
+    if (call.outgoing){
+        NSLog(@&quot;拨出电话&quot;);
+    }else if (call.hasEnded){
+        NSLog(@&quot;结束&quot;);
+    }
+}
+</code></pre><h3 id="2-身份证键盘"><a href="#2-身份证键盘" class="headerlink" title="2.身份证键盘"></a>2.身份证键盘</h3><p>  有时候项目中有需要输入身份证号码的地方，用系统键盘或者第三方键盘都没有单独的只能输入数字和X的键盘，这时候就只能自定义一个键盘了。</p>
+<p>  关键操作主要是画一个有数字按钮和X按钮的视图，然后赋值给输入框的<code>inputView</code>属性，另外就是当拿到数字字符或者X字符后，输入到输入框的时候注意光标位置的改变。</p>
+<p>  具体代码参照<a href="https://github.com/xiaote2016/XTIDCardKeyboard" target="_blank" rel="noopener">github地址</a></p>
+<h3 id="3-监听数组里的内容改变"><a href="#3-监听数组里的内容改变" class="headerlink" title="3.监听数组里的内容改变"></a>3.监听数组里的内容改变</h3><p>监听数组里的内容增加，删除，可以使用<code>KVOMutableArray</code>，支持<code>block</code>，支持<code>RAC</code>。</p>
+<p><a href="https://github.com/haifengkao/KVOMutableArray" target="_blank" rel="noopener">github地址</a></p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/blogImg/alipay.JPG">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/blogImg/WeChatPay.JPG">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -193,61 +278,116 @@ var _hmt = _hmt || [];
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://qr.liantu.com/api.php?text=http://blog.xtxiete.com/2018/12/03/Summary of minor problems in the project/" alt="微信分享二维码">
+    </div>
+</div>
+
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/10/23/URL is recognized in the string/" class="archive-article-date">
-  	<time datetime="2018-10-23T08:45:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-23</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/2018/12/11/AppStoreAuditProblem/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          提交审核反馈的问题（持续更新）
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/10/23/URL is recognized in the string/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">字符串中识别URL</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/10/23/URL is recognized in the string/">字符串中识别URL</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">iOS</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Objective-C</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
+
+  
 
 
           </div>
@@ -270,9 +410,9 @@ var _hmt = _hmt || [];
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
