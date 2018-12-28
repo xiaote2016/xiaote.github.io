@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="Xiaote&#39;s Blog">
 <meta property="og:description" content="1.判断电话是否拨出项目中有时候需要统计某个电话是否真的拨打出去，可以用下面的方法： iOS 10（包括10）之前：    在需要用到的地方导入 #import &amp;lt;CoreTelephony/CTCallCenter.h&amp;gt;  #import &amp;lt;CoreTelephony/CTCall.h&amp;gt; 创建一个属性 @property (nonatomic, strong) CTCal">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-12-11T02:46:58.000Z">
+<meta property="og:updated_time" content="2018-12-28T02:22:00.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="项目小问题总结（持续更新）">
 <meta name="twitter:description" content="1.判断电话是否拨出项目中有时候需要统计某个电话是否真的拨打出去，可以用下面的方法： iOS 10（包括10）之前：    在需要用到的地方导入 #import &amp;lt;CoreTelephony/CTCallCenter.h&amp;gt;  #import &amp;lt;CoreTelephony/CTCall.h&amp;gt; 创建一个属性 @property (nonatomic, strong) CTCal">
@@ -224,7 +224,34 @@ self.callCenter.callEventHandler = ^(CTCall* call) {
 <p>  具体代码参照<a href="https://github.com/xiaote2016/XTIDCardKeyboard" target="_blank" rel="noopener">github地址</a></p>
 <h3 id="3-监听数组里的内容改变"><a href="#3-监听数组里的内容改变" class="headerlink" title="3.监听数组里的内容改变"></a>3.监听数组里的内容改变</h3><p>监听数组里的内容增加，删除，可以使用<code>KVOMutableArray</code>，支持<code>block</code>，支持<code>RAC</code>。</p>
 <p><a href="https://github.com/haifengkao/KVOMutableArray" target="_blank" rel="noopener">github地址</a></p>
+<h3 id="4-弹出框防键盘遮挡"><a href="#4-弹出框防键盘遮挡" class="headerlink" title="4.弹出框防键盘遮挡"></a>4.弹出框防键盘遮挡</h3><pre><code>// fixInfoView 为弹出框contentView;(就是防止被遮挡的视图)
+[[[NSNotificationCenter defaultCenter] rac_addObserverForName:UIKeyboardWillShowNotification object:nil]  subscribeNext:^(NSNotification * _Nullable x) {
+    STRONG
+    // 转换坐标
+     CGRect frmae = [self.fixInfoView.superview convertRect:self.fixInfoView.frame toView:[UIApplication sharedApplication].keyWindow];
 
+     CGRect keyboardfrmae = [x.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+
+     __block CGFloat value = CGRectGetMaxY(frmae) - keyboardfrmae.origin.y;
+    if (self.fixInfoView.superview){
+        [UIView animateWithDuration:0.3 animations:^{
+            STRONG
+
+            self.fixInfoView.superview.transform = CGAffineTransformTranslate(self.fixInfoView.superview.transform, 0, -value);
+
+    }
+
+}];
+[[[NSNotificationCenter defaultCenter] rac_addObserverForName:UIKeyboardWillHideNotification object:nil]  subscribeNext:^(NSNotification * _Nullable x) {
+    STRONG
+    if (self.fixInfoView.superview){
+        [UIView animateWithDuration:0.3 animations:^{
+            STRONG
+            self.fixInfoView.superview.transform = CGAffineTransformIdentity;
+        }];
+    }
+}];
+</code></pre>
       
 
       
